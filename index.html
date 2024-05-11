@@ -1,0 +1,89 @@
+<!doctype html>
+<html>
+<style>
+form {
+     margin:auto;
+     width:100%;
+}
+.result {
+     margin:auto;
+     width:40%;
+     border: 1px solid #ccc
+}
+fieldset {
+  background-color: #D3D3D3;
+}
+
+legend {
+  background-color: gray;
+  color: white;
+  padding: 5px 10px;
+}
+
+input {
+  margin: 5px;
+  color: black;
+  background-color: rgb(192,192,192);
+}
+
+div {
+  border-style: solid;
+  border-color: black;
+  background-color: #D3D3D3;
+}
+
+
+</style>
+<head>
+<h1 style="font-size:200%;color:black;" align="center">Water Quality and Potability Anaylsis</h1>
+</head>
+<body bgcolor="dimgray">
+<form action="{{url_for('main') }}" method="POST">
+   <fieldset>
+	  <legend>Input Values:</legend>
+	 ph:<span style="color:red">*</span>
+       <input name="ph" type="number" step="0.01" required>
+       <br>
+       <br>Hardness:<span style="color:red">*</span>
+       <input name="Hardness" type="number" step="0.01" required>
+       <br>
+       <br>Solids:<span style="color:red">*</span>
+       <input name="Solids" type="number" step="0.01" required>	
+       <br>
+       <br>Chloramines:<span style="color:red">*</span>
+       <input name="Chloramines" type="number" step="0.01" required>
+       <br>	
+       <br>Sulfate:<span style="color:red">*</span>
+       <input name="Sulfate" type="number" step="0.01" required>	
+       <br>
+       <br>Conductivity:<span style="color:red">*</span>
+       <input name="Conductivity" type="number" step="0.01" required>	
+       <br>
+       <br>Organic_carbon:<span style="color:red">*</span>
+       <input name="Organic_carbon" type="number" step="0.01" required>	
+       <br>
+       <br>Trihalomethanes:<span style="color:red">*</span>
+       <input name="Trihalomethanes" type="number" step="0.01" required>	
+       <br>
+       <br>Turbidity:<span style="color:red">*</span>
+       <input name="Turbidity" type="number" step="0.01" required>	
+       <br>
+       <br>
+       <input type="submit" >
+    </fieldset>
+</form>	  
+<br>
+<div class="container" align="left">
+{% if result==0  %}
+     {% for variable,value in original_input.items()%}
+          <b> {{variable}}</b>  : {{value}}, 
+          {% endfor %}
+          <p style="font-size:120%;color:black;"><b>(Note: Result = 0 (Water is not Potable), Result = 1 (Water is Potable))</b></p>
+          <p style="font-size:150%"><b>Result: {{result}}</b></p> 
+{% else %}
+          <p style="font-size:150%"><b>Result: {{result}}</b></p>             
+       {% endif %}
+
+</div>
+</body>
+</html>
